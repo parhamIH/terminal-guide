@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="راهنمای فارسی و کاربردی دستورات پرکاربرد PowerShell ویندوز، CMD و ترمینال لینوکس همراه با مخفف‌ها، توضیح ساده و مثال.">
+  <meta name="theme-color" content="#111827">
+  <title>راهنمای دستورات ترمینال | ویندوز و لینوکس</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b1020;--panel:#121a2b;--panel2:#172238;--line:#26334b;--text:#e8eef8;--muted:#9eacc3;--accent:#82b1ff;--accent2:#9ce5cc;--warn:#ffd18a;--code:#080d18;--shadow:0 16px 38px #0002}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 85% 0%,#1a2b4b 0,transparent 36%),var(--bg);color:var(--text);font-family:Tahoma,"Segoe UI",Arial,sans-serif;line-height:1.85}
+    a{color:var(--accent)}button,input,select{font:inherit}button{cursor:pointer} .wrap{width:min(1220px,calc(100% - 32px));margin-inline:auto}
+    .hero{padding:48px 0 28px}.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--accent2);background:#9ce5cc12;border:1px solid #9ce5cc38;border-radius:999px;padding:4px 12px;font-size:.82rem}
+    h1{font-size:clamp(1.8rem,4vw,3.15rem);line-height:1.35;letter-spacing:-.7px;margin:18px 0 12px}.lead{max-width:850px;color:var(--muted);font-size:1.04rem;margin:0}
+    .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:28px}.stat{padding:15px 18px;background:#121a2bcc;border:1px solid var(--line);border-radius:16px}.stat strong{font-size:1.45rem;display:block;color:var(--accent2)}.stat span{font-size:.86rem;color:var(--muted)}
+    .toolbar{position:sticky;top:0;z-index:10;padding:14px 0;background:#0b1020eF;backdrop-filter:blur(14px);border-block:1px solid #26334b99}
+    .searchrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px}.searchbox{position:relative}.searchbox input{width:100%;border:1px solid var(--line);background:var(--panel);color:var(--text);padding:13px 44px 13px 14px;border-radius:13px;outline:none}.searchbox input:focus{border-color:var(--accent);box-shadow:0 0 0 3px #82b1ff20}.searchicon{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:var(--muted)}
+    .clearbtn,.filterbtn,.copybtn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:11px;padding:10px 14px;transition:.15s}.clearbtn:hover,.filterbtn:hover,.copybtn:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .osfilters{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}.filterbtn{padding:7px 13px;font-size:.9rem}.filterbtn.active{background:var(--accent);color:#07111e;border-color:var(--accent);font-weight:bold}.cats{display:flex;gap:7px;overflow-x:auto;padding:12px 0 2px;scrollbar-width:thin}.catbtn{border:1px solid #26334b;background:transparent;color:var(--muted);border-radius:99px;padding:6px 12px;white-space:nowrap;font-size:.82rem}.catbtn.active{color:var(--accent2);border-color:#9ce5cc88;background:#9ce5cc12}
+    main{padding:26px 0 52px}.resultshead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}.resultshead h2{font-size:1.25rem;margin:0}.count{color:var(--muted);font-size:.9rem}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{background:linear-gradient(145deg,#131d30,#101727);border:1px solid var(--line);border-radius:17px;padding:17px;box-shadow:var(--shadow);min-width:0}.cardhead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.command-title{font-size:1.05rem;font-weight:800;direction:ltr;text-align:left;overflow-wrap:anywhere;color:var(--text)}.badge{display:inline-block;white-space:nowrap;border-radius:8px;padding:2px 8px;font-size:.72rem;color:var(--accent2);background:#9ce5cc14;border:1px solid #9ce5cc30}.category{font-size:.78rem;color:var(--muted);margin-top:4px}.aliases{margin:10px 0 8px;color:var(--muted);font-size:.88rem}.aliases b{color:#cbd8eb}.desc{margin:7px 0 13px;color:#d0daea;font-size:.94rem}.syntax{direction:ltr;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere;background:var(--code);border:1px solid #202b40;padding:11px 12px;border-radius:10px;color:#b8d8ff;font: .89rem/1.75 Consolas,"Cascadia Code",monospace;position:relative}.code-label{font-size:.75rem;color:var(--muted);margin:8px 0 3px}.cardfoot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}.tip{color:var(--muted);font-size:.8rem;min-width:0}.copybtn{padding:5px 10px;font-size:.8rem;flex-shrink:0}.caution{color:var(--warn)}.empty{grid-column:1/-1;text-align:center;padding:45px 18px;border:1px dashed var(--line);border-radius:16px;color:var(--muted)}
+    .introgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 22px}.infobox{padding:17px 18px;border:1px solid var(--line);background:#111a2a;border-radius:15px}.infobox h3{font-size:1rem;margin:0 0 7px}.infobox p{margin:0;color:var(--muted);font-size:.9rem}.inlinecode{font: .9em Consolas,monospace;color:var(--accent2);direction:ltr;display:inline-block;background:#07101b;padding:0 5px;border-radius:5px}.notice{border-right:3px solid var(--warn);padding:10px 14px;background:#ffd18a0d;border-radius:8px;color:#d6dce7;font-size:.88rem;margin:20px 0}
+    footer{padding:22px 0 38px;border-top:1px solid var(--line);color:var(--muted);font-size:.84rem}footer .footinner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}.hidden{display:none!important}
+    @media(max-width:760px){.grid{grid-template-columns:1fr}.introgrid{grid-template-columns:1fr}.stats{grid-template-columns:1fr;gap:8px}.stat{display:flex;align-items:center;justify-content:space-between}.stat strong{font-size:1.2rem}.hero{padding-top:32px}.searchrow{grid-template-columns:1fr}.clearbtn{width:100%}.toolbar{position:static}.resultshead{align-items:flex-start;flex-direction:column}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="hero wrap">
+    <span class="eyebrow">راهنمای سریع و کاربردی ترمینال</span>
+    <h1>دستورات پرکاربرد ویندوز و لینوکس</h1>
+    <p class="lead">یک مرجع فارسی برای یاد گرفتن دستورها، نام کامل و مخفف‌ها، کاربرد هر دستور و نمونه‌ای که بتوانی در ترمینال اجرا کنی. از جست‌وجو استفاده کن یا سیستم‌عامل و دسته‌بندی را فیلتر کن.</p>
+    <div class="stats" aria-label="آمار راهنما">
+      <div class="stat"><strong id="totalCount">—</strong><span>دستور و نمونه</span></div>
+      <div class="stat"><strong>۳</strong><span>محیط: PowerShell، CMD و Linux</span></div>
+      <div class="stat"><strong>RTL</strong><span>فارسی و سازگار با موبایل</span></div>
+    </div>
+  </header>
+
+  <section class="toolbar">
+    <div class="wrap">
+      <div class="searchrow">
+        <div class="searchbox"><span class="searchicon" aria-hidden="true">⌕</span><input id="search" type="search" placeholder="جست‌وجو: ni، New-Item، ساخت پوشه، فایل، شبکه..." autocomplete="off" aria-label="جست‌وجوی دستورها"></div>
+        <button class="clearbtn" id="reset">پاک کردن فیلترها</button>
+      </div>
+      <div class="osfilters" role="group" aria-label="انتخاب محیط ترمینال">
+        <button class="filterbtn active" data-os="all">همه</button>
+        <button class="filterbtn" data-os="ps">PowerShell</button>
+        <button class="filterbtn" data-os="cmd">Windows CMD</button>
+        <button class="filterbtn" data-os="linux">Linux / Ubuntu / WSL</button>
+      </div>
+      <div class="cats" id="categories" aria-label="فیلتر دسته‌بندی"></div>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <section class="introgrid" id="intro">
+      <article class="infobox"><h3>مخفف‌ها در PowerShell</h3><p>برای نمونه، <span class="inlinecode">ni</span> نام کوتاه <span class="inlinecode">New-Item</span> است و <span class="inlinecode">ls</span> معمولاً به <span class="inlinecode">Get-ChildItem</span> اشاره می‌کند. مخفف‌ها را می‌توانی در ستون هر دستور ببینی.</p></article>
+      <article class="infobox"><h3>دستورهای لینوکس</h3><p>بیشتر دستورهای Linux نام کوتاه و ثابتی مانند <span class="inlinecode">ls</span>، <span class="inlinecode">cp</span> و <span class="inlinecode">mv</span> دارند. گزینه‌هایی مثل <span class="inlinecode">-la</span> بخشی از دستور هستند، نه نام جایگزین آن.</p></article>
+    </section>
+    <div class="notice"><strong>احتیاط:</strong> پیش از اجرای دستور حذف یا تغییر مجوزها، مسیر و گزینه‌ها را بررسی کن. دستورهای نیازمند دسترسی مدیر را فقط وقتی اجرا کن که کاربردشان را می‌دانی.</div>
+    <div class="resultshead"><h2 id="listTitle">فهرست دستورها</h2><span class="count" id="resultCount" aria-live="polite"></span></div>
+    <section class="grid" id="grid" aria-live="polite"></section>
+  </main>
+
+  <footer><div class="wrap footinner"><span>راهنمای آموزشی آفلاین؛ برای استفاده در GitHub Pages آماده است.</span><span>نکته: بعضی فرمان‌ها با توجه به نسخه، توزیع لینوکس یا تنظیمات سیستم ممکن است متفاوت باشند.</span></div></footer>
+
+<script>
+const commands = [
+  // PowerShell — navigation and files
+  {os:'ps',cat:'مسیر و فایل‌ها',name:'Get-Location',short:'pwd · gl',desc:'مسیر پوشه‌ای را نشان می‌دهد که در حال حاضر داخل آن هستی.',example:'Get-Location',extra:'معادل رایج در Linux: pwd',tags:'مسیر پوشه فعلی'},
+  {os:'ps',cat:'مسیر و فایل‌ها',name:'Get-ChildItem',short:'ls · dir · gci',desc:'فایل‌ها و پوشه‌های مسیر فعلی را فهرست می‌کند.',example:'Get-ChildItem -Force',extra:'گزینهٔ -Force می‌تواند موارد مخفی را هم نشان دهد.',tags:'نمایش لیست فایل hidden'},
+  {os:'ps',cat:'مسیر و فایل‌ها',name:'Set-Location',short:'cd · chdir · sl',desc:'مسیر فعلی ترمینال را عوض می‌کند.',example:'Set-Location .\\Documents',extra:'برای رفتن به پوشهٔ بالاتر: cd ..',tags:'تغییر پوشه ورود رفتن'},
+  {os:'ps',cat:'مسیر و فایل‌ها',name:'New-Item',short:'ni',desc:'فایل یا پوشهٔ جدید می‌سازد؛ با -ItemType نوع آن را مشخص می‌کنی.',example:'New-Item -Path "note.txt" -ItemType File\nNew-Item -Path "reports" -ItemType Directory',extra:'نمونهٔ کوتاه: ni note.txt -ItemType File',tags:'ساخت فایل پوشه create mkdir'},
+  {os:'ps',cat:'مسیر و فایل‌ها',name:'Copy-Item',short:'cp · copy · cpi',desc:'از فایل یا پوشه کپی می‌گیرد.',example:'Copy-Item .\\note.txt .\\note-copy.txt',extra:'برای کپی پوشه همراه محتوا از -Recurse استفاده کن.',tags:'کپی copy فایل'},
+  {os:'ps',cat:'مسیر و فایل‌ها',name:'Move-Item',short:'mv · move · mi',desc:'فایل یا پوشه را منتقل می‌کند؛ برای تغییر نام هم قابل استفاده است.',example:'Move-Item .\\note.txt .\\archive\\note.txt',extra:'اگر مقصد نام جدید داشته باشد، نام فایل هم عوض می‌شود.',tags:'انتقال جابه جایی rename'},
+  {os:'ps',cat:'مسیر و فایل‌ها',name:'Rename-Item',short:'rni',desc:'نام فایل یا پوشه را تغییر می‌دهد.',example:'Rename-Item -Path "old.txt" -NewName "new.txt"',extra:'این دستور برای تغییر نام است، نه انتقال به مسیر دیگر.',tags:'تغییر نام فایل'},
+  {os:'ps',cat:'مسیر و فایل‌ها',name:'Remove-Item',short:'rm · del · erase · ri',desc:'فایل یا پوشه را حذف می‌کند.',example:'Remove-Item .\\old.txt',extra:'حذف پوشه همراه محتوا معمولاً به -Recurse نیاز دارد؛ قبل از اجرا مسیر را بررسی کن.',tags:'حذف پاک کردن پوشه'},
+  {os:'ps',cat:'مسیر و فایل‌ها',name:'Test-Path',short:'بدون مخفف رایج',desc:'بررسی می‌کند فایل یا مسیر موردنظر وجود دارد یا نه؛ خروجی معمولاً True یا False است.',example:'Test-Path .\\config.json',extra:'برای شرط‌های اسکریپت‌نویسی بسیار مفید است.',tags:'بررسی وجود فایل'},
+  {os:'ps',cat:'متن و فایل',name:'Get-Content',short:'cat · gc · type',desc:'محتوای فایل متنی را نمایش می‌دهد.',example:'Get-Content .\\notes.txt',extra:'برای دیدن چند خط آخر می‌توانی از Get-Content همراه -Tail استفاده کنی.',tags:'خواندن فایل نمایش محتوا'},
+  {os:'ps',cat:'متن و فایل',name:'Set-Content',short:'sc',desc:'محتوای فایل را می‌نویسد و محتوای قبلی را جایگزین می‌کند.',example:'Set-Content -Path "note.txt" -Value "Hello"',extra:'مراقب باش: محتوای قبلی فایل بازنویسی می‌شود.',tags:'نوشتن فایل جایگزین'},
+  {os:'ps',cat:'متن و فایل',name:'Add-Content',short:'ac',desc:'متن تازه را به انتهای فایل اضافه می‌کند و محتوای قبلی را نگه می‌دارد.',example:'Add-Content -Path "log.txt" -Value "Started"',extra:'برای افزودن خط به فایل گزارش کاربرد دارد.',tags:'افزودن نوشتن append'},
+  {os:'ps',cat:'متن و فایل',name:'Select-String',short:'sls',desc:'داخل فایل یا متن به دنبال عبارت می‌گردد؛ شبیه جست‌وجوی متنی grep در لینوکس.',example:'Select-String -Path "*.log" -Pattern "error"',extra:'می‌توانی از عبارت‌های منظم (Regex) هم استفاده کنی.',tags:'جستجو متن فایل grep پیدا کردن'},
+  {os:'ps',cat:'متن و فایل',name:'Get-ChildItem -Recurse',short:'ترکیب پارامترها',desc:'فایل‌ها و زیرپوشه‌ها را به‌صورت بازگشتی فهرست می‌کند.',example:'Get-ChildItem -Path . -Recurse -File',extra:'در پوشه‌های بزرگ ممکن است خروجی زیادی داشته باشد.',tags:'جستجو زیرپوشه recursive'},
+  {os:'ps',cat:'راهنما و تاریخچه',name:'Get-Help',short:'help · man',desc:'راهنمای دستورهای PowerShell را نمایش می‌دهد.',example:'Get-Help Get-ChildItem -Examples',extra:'اگر راهنمای کامل موجود نبود، ممکن است لازم باشد Help را به‌روزرسانی کنی.',tags:'آموزش راهنما help'},
+  {os:'ps',cat:'راهنما و تاریخچه',name:'Get-Command',short:'gcm',desc:'دستورها، تابع‌ها و برنامه‌هایی را که PowerShell می‌شناسد پیدا می‌کند.',example:'Get-Command *-Item',extra:'برای دیدن اینکه یک نام کوتاه به چه دستوری اشاره می‌کند بسیار مفید است.',tags:'یافتن دستور alias command'},
+  {os:'ps',cat:'راهنما و تاریخچه',name:'Get-Alias',short:'gal',desc:'فهرست نام‌های مستعار (Alias) را نشان می‌دهد.',example:'Get-Alias ni\nGet-Alias ls',extra:'راه ساده‌ای برای فهمیدن معنی مخفف‌های PowerShell است.',tags:'alias مخفف نام کوتاه'},
+  {os:'ps',cat:'راهنما و تاریخچه',name:'Get-History',short:'h · history',desc:'دستورهایی را که در نشست فعلی وارد کرده‌ای نشان می‌دهد.',example:'Get-History',extra:'برای اجرای دوبارهٔ دستور قبلی می‌توانی از کلید فلش بالا هم استفاده کنی.',tags:'تاریخچه فرمان قبلی'},
+  {os:'ps',cat:'راهنما و تاریخچه',name:'Clear-Host',short:'cls · clear',desc:'صفحهٔ ترمینال را از نظر نمایشی پاک می‌کند؛ فایل‌ها را حذف نمی‌کند.',example:'Clear-Host',extra:'میان‌بر صفحه‌کلید: معمولاً Ctrl+L در ترمینال‌های پشتیبان.',tags:'پاک کردن صفحه'},
+  {os:'ps',cat:'سیستم و پردازش',name:'Get-Process',short:'ps · gps',desc:'پردازش‌های در حال اجرای سیستم را فهرست می‌کند.',example:'Get-Process',extra:'برای جست‌وجوی یک برنامه: Get-Process *chrome*',tags:'پردازش برنامه task manager'},
+  {os:'ps',cat:'سیستم و پردازش',name:'Stop-Process',short:'kill · spps',desc:'یک پردازش را متوقف می‌کند.',example:'Stop-Process -Name notepad',extra:'بستن اجباری ممکن است باعث از دست رفتن داده‌های ذخیره‌نشده شود.',tags:'بستن برنامه kill'},
+  {os:'ps',cat:'سیستم و پردازش',name:'Get-Service',short:'gsv',desc:'سرویس‌های ویندوز و وضعیت آن‌ها را نشان می‌دهد.',example:'Get-Service',extra:'برای جست‌وجو: Get-Service *update*',tags:'سرویس services سرویس ویندوز'},
+  {os:'ps',cat:'سیستم و پردازش',name:'Get-ComputerInfo',short:'بدون مخفف رایج',desc:'اطلاعات زیادی دربارهٔ ویندوز و سخت‌افزار نمایش می‌دهد.',example:'Get-ComputerInfo | Select-Object WindowsProductName, OsVersion',extra:'برای خروجی خلاصه از Select-Object استفاده شده است.',tags:'مشخصات سیستم ویندوز سخت افزار'},
+  {os:'ps',cat:'شبکه',name:'Test-Connection',short:'بدون مخفف رایج',desc:'ارتباط شبکه با یک میزبان را آزمایش می‌کند؛ مشابه ping.',example:'Test-Connection example.com -Count 4',extra:'اگر پاسخ نگیرد، لزوماً به معنی خاموش بودن سیستم مقصد نیست؛ فایروال ممکن است پاسخ را ببندد.',tags:'ping تست شبکه اتصال'},
+  {os:'ps',cat:'شبکه',name:'Get-NetIPConfiguration',short:'بدون مخفف رایج',desc:'اطلاعات کارت شبکه، IP و درگاه پیش‌فرض را نمایش می‌دهد.',example:'Get-NetIPConfiguration',extra:'ممکن است برخی نسخه‌ها یا سیستم‌ها خروجی متفاوتی داشته باشند.',tags:'ip address شبکه wifi'},
+  {os:'ps',cat:'شبکه',name:'Resolve-DnsName',short:'بدون مخفف رایج',desc:'نام دامنه را از طریق DNS بررسی می‌کند.',example:'Resolve-DnsName example.com',extra:'برای عیب‌یابی مشکل DNS کاربرد دارد.',tags:'dns دامنه تبدیل نام'},
+  {os:'ps',cat:'پکیج و برنامه',name:'winget install',short:'مدیر بستهٔ ویندوز',desc:'با Windows Package Manager برنامه نصب می‌کند؛ نام بسته باید درست باشد.',example:'winget search vscode\nwinget install Microsoft.VisualStudioCode',extra:'در بعضی نسخه‌های ویندوز باید App Installer به‌روز باشد.',tags:'نصب برنامه نرم افزار package'},
+  {os:'ps',cat:'پکیج و برنامه',name:'winget upgrade',short:'مدیر بستهٔ ویندوز',desc:'برنامه‌هایی را که از طریق winget قابل به‌روزرسانی هستند بررسی یا به‌روزرسانی می‌کند.',example:'winget upgrade\nwinget upgrade --all',extra:'قبل از --all، فهرست تغییرات را بررسی کن.',tags:'آپدیت بروزرسانی برنامه'},
+  {os:'ps',cat:'فیلتر و خروجی',name:'Select-Object',short:'select · select-object',desc:'ستون‌ها یا تعداد مشخصی از آیتم‌ها را از خروجی انتخاب می‌کند.',example:'Get-Process | Select-Object -First 5 Name, Id',extra:'برای خروجی‌های کوتاه و خواناتر کاربرد دارد.',tags:'انتخاب خروجی ستون اول'},
+  {os:'ps',cat:'فیلتر و خروجی',name:'Where-Object',short:'where · ?',desc:'خروجی را براساس یک شرط فیلتر می‌کند.',example:'Get-Process | Where-Object {$_.CPU -gt 10}',extra:'علامت خط لولهٔ | خروجی دستور سمت چپ را به دستور بعدی می‌دهد.',tags:'فیلتر شرط pipe'},
+  {os:'ps',cat:'فیلتر و خروجی',name:'Sort-Object',short:'sort',desc:'نتیجه‌ها را بر اساس یک ویژگی مرتب می‌کند.',example:'Get-Process | Sort-Object CPU -Descending',extra:'-Descending مرتب‌سازی نزولی انجام می‌دهد.',tags:'مرتب کردن sort'},
+  {os:'ps',cat:'فیلتر و خروجی',name:'Measure-Object',short:'measure',desc:'تعداد یا آمار سادهٔ داده‌ها را محاسبه می‌کند.',example:'Get-ChildItem -File | Measure-Object',extra:'در این مثال تعداد فایل‌ها در خروجی Count دیده می‌شود.',tags:'شمارش count آمار'},
+
+  // Windows CMD
+  {os:'cmd',cat:'مسیر و فایل‌ها',name:'dir',short:'—',desc:'فایل‌ها و پوشه‌های مسیر فعلی را فهرست می‌کند.',example:'dir /a',extra:'/a می‌تواند فایل‌های مخفی را هم نشان دهد.',tags:'نمایش لیست فایل ls'},
+  {os:'cmd',cat:'مسیر و فایل‌ها',name:'cd',short:'chdir',desc:'مسیر فعلی را تغییر می‌دهد.',example:'cd Documents\ncd ..',extra:'برای تغییر درایو هم می‌توانی از cd /d D:\\Projects استفاده کنی.',tags:'تغییر مسیر پوشه'},
+  {os:'cmd',cat:'مسیر و فایل‌ها',name:'mkdir',short:'md',desc:'پوشهٔ جدید می‌سازد.',example:'mkdir practice',extra:'اگر پوشه موجود باشد، پیام خطا ممکن است نمایش داده شود.',tags:'ساخت پوشه'},
+  {os:'cmd',cat:'مسیر و فایل‌ها',name:'copy',short:'—',desc:'فایل را کپی می‌کند.',example:'copy notes.txt notes-backup.txt',extra:'برای کپی پوشه‌ها از xcopy یا robocopy استفاده می‌شود.',tags:'کپی فایل'},
+  {os:'cmd',cat:'مسیر و فایل‌ها',name:'move',short:'—',desc:'فایل‌ها را جابه‌جا می‌کند یا نامشان را تغییر می‌دهد.',example:'move notes.txt backup\\notes.txt',extra:'مقصد باید مسیر معتبری باشد.',tags:'انتقال جابه جایی'},
+  {os:'cmd',cat:'مسیر و فایل‌ها',name:'ren',short:'rename',desc:'نام فایل را تغییر می‌دهد.',example:'ren old.txt new.txt',extra:'نام جدید را بدون مسیر پوشه وارد کن.',tags:'تغییر نام فایل'},
+  {os:'cmd',cat:'مسیر و فایل‌ها',name:'del',short:'erase',desc:'یک یا چند فایل را حذف می‌کند.',example:'del old.txt',extra:'معمولاً برای پوشه‌ها از rmdir استفاده می‌شود؛ قبل از اجرا نام را بررسی کن.',tags:'حذف پاک کردن'},
+  {os:'cmd',cat:'مسیر و فایل‌ها',name:'type',short:'—',desc:'محتوای یک فایل متنی را نمایش می‌دهد.',example:'type notes.txt',extra:'فایل‌های حجیم را ممکن است یک‌جا در صفحه چاپ کند.',tags:'خواندن محتوا فایل'},
+  {os:'cmd',cat:'مسیر و فایل‌ها',name:'where',short:'—',desc:'محل فایل اجرایی یک فرمان را در مسیرهای جست‌وجو پیدا می‌کند.',example:'where python',extra:'برای بررسی نصب بودن برنامه‌ها مفید است.',tags:'پیدا کردن executable محل'},
+  {os:'cmd',cat:'ترمینال و راهنما',name:'cls',short:'—',desc:'صفحهٔ CMD را پاک می‌کند.',example:'cls',extra:'فایل‌ها یا تاریخچهٔ سیستم را حذف نمی‌کند.',tags:'پاک صفحه clear'},
+  {os:'cmd',cat:'ترمینال و راهنما',name:'help',short:'/?',desc:'فهرستی از فرمان‌های CMD یا راهنمای یک فرمان را نشان می‌دهد.',example:'help\ndir /?',extra:'بسیاری از فرمان‌های CMD با افزودن /? راهنما دارند.',tags:'راهنما کمک'},
+  {os:'cmd',cat:'سیستم و پردازش',name:'tasklist',short:'—',desc:'پردازش‌های در حال اجرا را نشان می‌دهد.',example:'tasklist',extra:'برای بستن پردازش از taskkill استفاده می‌شود.',tags:'پردازش برنامه'},
+  {os:'cmd',cat:'سیستم و پردازش',name:'taskkill',short:'—',desc:'پردازش را با شناسه یا نام متوقف می‌کند.',example:'taskkill /PID 1234\ntaskkill /IM notepad.exe',extra:'از /F برای اجبار در بستن استفاده می‌شود؛ با احتیاط.',tags:'بستن برنامه kill process'},
+  {os:'cmd',cat:'سیستم و پردازش',name:'systeminfo',short:'—',desc:'اطلاعات کلی سیستم و ویندوز را نشان می‌دهد.',example:'systeminfo',extra:'ممکن است خروجی آن طولانی باشد.',tags:'مشخصات سیستم'},
+  {os:'cmd',cat:'شبکه',name:'ipconfig',short:'—',desc:'اطلاعات IP کارت‌های شبکه را نمایش می‌دهد.',example:'ipconfig /all',extra:'/all جزئیات بیشتری مثل DNS و MAC Address نشان می‌دهد.',tags:'ip شبکه dns'},
+  {os:'cmd',cat:'شبکه',name:'ping',short:'—',desc:'دسترسی شبکه به یک میزبان را با ارسال درخواست آزمایش می‌کند.',example:'ping example.com',extra:'قطع پاسخ ممکن است به تنظیمات فایروال مربوط باشد.',tags:'تست اتصال اینترنت'},
+  {os:'cmd',cat:'شبکه',name:'tracert',short:'—',desc:'مسیر تقریبی عبور بسته‌ها تا مقصد را نشان می‌دهد.',example:'tracert example.com',extra:'در بعضی مسیرها برخی گام‌ها پاسخ نمی‌دهند.',tags:'مسیر شبکه traceroute'},
+  {os:'cmd',cat:'شبکه',name:'nslookup',short:'—',desc:'برای پرس‌وجو از DNS استفاده می‌شود.',example:'nslookup example.com',extra:'برای عیب‌یابی نام دامنه مفید است.',tags:'dns دامنه'},
+  {os:'cmd',cat:'جست‌وجوی متن',name:'findstr',short:'—',desc:'متن داخل فایل‌ها یا خروجی را جست‌وجو می‌کند.',example:'findstr /i "error" app.log',extra:'/i جست‌وجو را نسبت به حروف بزرگ و کوچک بی‌تفاوت می‌کند.',tags:'جستجو متن grep'},
+  {os:'cmd',cat:'جست‌وجوی متن',name:'echo',short:'—',desc:'متن را چاپ می‌کند؛ برای نوشتن سریع متن در فایل هم کاربرد دارد.',example:'echo Hello\necho Hello > hello.txt',extra:'علامت > خروجی را در فایل می‌نویسد و فایل قبلی را بازنویسی می‌کند.',tags:'چاپ متن فایل'},
+  {os:'cmd',cat:'سیستم و پردازش',name:'sfc /scannow',short:'ابزار بررسی فایل‌های سیستم',desc:'فایل‌های سیستمی ویندوز را بررسی می‌کند و در صورت امکان خرابی‌ها را ترمیم می‌کند.',example:'sfc /scannow',extra:'معمولاً باید CMD را با دسترسی Administrator اجرا کنی.',tags:'تعمیر ویندوز system files',caution:true},
+
+  // Linux
+  {os:'linux',cat:'مسیر و فایل‌ها',name:'pwd',short:'—',desc:'مسیر کامل پوشه‌ای را که اکنون داخل آن هستی نمایش می‌دهد.',example:'pwd',extra:'مناسب برای اینکه قبل از حذف یا ساخت فایل، مسیر را بررسی کنی.',tags:'مسیر فعلی پوشه'},
+  {os:'linux',cat:'مسیر و فایل‌ها',name:'ls',short:'گزینه‌های پرکاربرد: -l · -a · -h',desc:'فایل‌ها و پوشه‌ها را نشان می‌دهد.',example:'ls -la\nls -lh',extra:'-l جزئیات، -a فایل‌های مخفی و -h اندازهٔ خواناتر را نمایش می‌دهد.',tags:'نمایش فایل list hidden'},
+  {os:'linux',cat:'مسیر و فایل‌ها',name:'cd',short:'—',desc:'به پوشهٔ دیگری می‌رود.',example:'cd Documents\ncd ..\ncd ~',extra:'~ یعنی پوشهٔ خانگی کاربر؛ .. یعنی پوشهٔ والد.',tags:'تغییر مسیر پوشه'},
+  {os:'linux',cat:'مسیر و فایل‌ها',name:'mkdir',short:'—',desc:'پوشه می‌سازد.',example:'mkdir projects\nmkdir -p projects/demo/src',extra:'-p مسیرهای والدِ لازم را هم می‌سازد.',tags:'ساخت پوشه directory'},
+  {os:'linux',cat:'مسیر و فایل‌ها',name:'touch',short:'—',desc:'فایل خالی می‌سازد؛ اگر فایل موجود باشد زمان دسترسی/تغییر را به‌روزرسانی می‌کند.',example:'touch notes.txt',extra:'محتوای فایل موجود را پاک نمی‌کند.',tags:'ساخت فایل خالی'},
+  {os:'linux',cat:'مسیر و فایل‌ها',name:'cp',short:'—',desc:'فایل یا پوشه را کپی می‌کند.',example:'cp notes.txt notes-copy.txt\ncp -r project project-backup',extra:'برای کپی پوشه معمولاً -r لازم است.',tags:'کپی copy فایل پوشه'},
+  {os:'linux',cat:'مسیر و فایل‌ها',name:'mv',short:'—',desc:'فایل یا پوشه را جابه‌جا می‌کند یا نام آن را عوض می‌کند.',example:'mv old.txt new.txt\nmv notes.txt ~/Documents/',extra:'مقصد موجود ممکن است باعث جایگزینی فایل شود؛ مسیر را بررسی کن.',tags:'انتقال تغییر نام'},
+  {os:'linux',cat:'مسیر و فایل‌ها',name:'rm',short:'گزینه‌ها: -r · -f · -i',desc:'فایل را حذف می‌کند؛ برای حذف پوشه به‌همراه محتویات از -r استفاده می‌شود.',example:'rm old.txt\nrm -ri old-folder',extra:'حذف معمولاً به سطل زباله نمی‌رود. از rm -rf با نهایت احتیاط استفاده کن.',tags:'حذف پاک کردن directory',caution:true},
+  {os:'linux',cat:'مسیر و فایل‌ها',name:'rmdir',short:'—',desc:'پوشهٔ خالی را حذف می‌کند.',example:'rmdir empty-folder',extra:'اگر داخل پوشه فایلی باشد، معمولاً حذف نمی‌شود.',tags:'حذف پوشه خالی'},
+  {os:'linux',cat:'مسیر و فایل‌ها',name:'find',short:'—',desc:'در یک مسیر و زیرپوشه‌های آن فایل‌ها را براساس نام یا ویژگی جست‌وجو می‌کند.',example:'find . -name "*.py"\nfind . -type d -name "test*"',extra:'نقطه یعنی مسیر فعلی.',tags:'جستجو فایل پیدا کردن'},
+  {os:'linux',cat:'متن و فایل',name:'cat',short:'—',desc:'محتوای فایل‌های متنی را چاپ می‌کند.',example:'cat notes.txt',extra:'برای فایل‌های بزرگ بهتر است از less استفاده کنی.',tags:'نمایش محتوا خواندن فایل'},
+  {os:'linux',cat:'متن و فایل',name:'less',short:'—',desc:'فایل متنی را صفحه‌به‌صفحه می‌خواند.',example:'less /var/log/syslog',extra:'برای خروج کلید q را بزن؛ با فلش‌ها یا PageUp/PageDown حرکت کن.',tags:'خواندن فایل بزرگ لاگ'},
+  {os:'linux',cat:'متن و فایل',name:'head',short:'—',desc:'به‌صورت پیش‌فرض ۱۰ خط اول فایل را نشان می‌دهد.',example:'head -n 20 app.log',extra:'-n تعداد خط‌ها را تعیین می‌کند.',tags:'خط اول فایل'},
+  {os:'linux',cat:'متن و فایل',name:'tail',short:'—',desc:'به‌صورت پیش‌فرض ۱۰ خط آخر فایل را نشان می‌دهد.',example:'tail -n 30 app.log\ntail -f app.log',extra:'-f فایل را دنبال می‌کند و خط‌های جدید را زنده نشان می‌دهد.',tags:'خط آخر log زنده'},
+  {os:'linux',cat:'متن و فایل',name:'grep',short:'گزینه‌ها: -i · -n · -r',desc:'عبارت موردنظر را داخل متن یا فایل پیدا می‌کند.',example:'grep -in "error" app.log\ngrep -r "TODO" src/',extra:'-i بی‌تفاوت به بزرگی حروف، -n شماره خط و -r جست‌وجوی بازگشتی است.',tags:'جستجو متن عبارت'},
+  {os:'linux',cat:'متن و فایل',name:'nano',short:'ویرایشگر ترمینالی',desc:'یک فایل متنی را در محیط ترمینال باز می‌کند یا می‌سازد.',example:'nano notes.txt',extra:'ذخیره: Ctrl+O؛ خروج: Ctrl+X.',tags:'ویرایش فایل editor'},
+  {os:'linux',cat:'متن و فایل',name:'echo',short:'—',desc:'متن یا مقدار متغیر را چاپ می‌کند.',example:'echo "Hello Linux"\necho $HOME',extra:'برای نوشتن در فایل از > یا برای افزودن از >> استفاده می‌شود.',tags:'چاپ متن variable'},
+  {os:'linux',cat:'مجوز و دسترسی',name:'sudo',short:'اجرای دستور با دسترسی مدیر',desc:'یک دستور را با دسترسی مدیر سیستم اجرا می‌کند؛ ممکن است رمز کاربر را بخواهد.',example:'sudo apt update',extra:'هر دستوری را بی‌دلیل با sudo اجرا نکن.',tags:'مدیر دسترسی root',caution:true},
+  {os:'linux',cat:'مجوز و دسترسی',name:'chmod',short:'—',desc:'مجوز خواندن، نوشتن یا اجرا را برای فایل و پوشه تغییر می‌دهد.',example:'chmod +x script.sh\nchmod 644 notes.txt',extra:'644 یعنی مالک خواندن/نوشتن و بقیه خواندن؛ +x مجوز اجرا را اضافه می‌کند.',tags:'مجوز permission executable'},
+  {os:'linux',cat:'مجوز و دسترسی',name:'chown',short:'—',desc:'مالک فایل یا پوشه را تغییر می‌دهد.',example:'sudo chown user:user notes.txt',extra:'انتخاب مالک اشتباه می‌تواند دسترسی برنامه‌ها را مختل کند.',tags:'مالک فایل owner',caution:true},
+  {os:'linux',cat:'مدیریت بسته‌ها',name:'apt update',short:'Ubuntu / Debian',desc:'فهرست بسته‌های موجود در مخازن را تازه می‌کند؛ خودِ این دستور معمولاً نرم‌افزارها را ارتقا نمی‌دهد.',example:'sudo apt update',extra:'برای نصب یا به‌روزرسانی، دستورات جداگانه وجود دارند.',tags:'بروزرسانی مخازن package'},
+  {os:'linux',cat:'مدیریت بسته‌ها',name:'apt upgrade',short:'Ubuntu / Debian',desc:'بسته‌های نصب‌شده را براساس اطلاعات مخازن به نسخه‌های جدیدتر ارتقا می‌دهد.',example:'sudo apt upgrade',extra:'پیش از تأیید، فهرست تغییرات را بررسی کن.',tags:'آپدیت نرم افزار سیستم'},
+  {os:'linux',cat:'مدیریت بسته‌ها',name:'apt install',short:'Ubuntu / Debian',desc:'یک برنامه یا بسته را نصب می‌کند.',example:'sudo apt install git',extra:'برای پیدا کردن بسته: apt search نام-بسته',tags:'نصب برنامه'},
+  {os:'linux',cat:'مدیریت بسته‌ها',name:'apt remove',short:'Ubuntu / Debian',desc:'یک بسته را حذف می‌کند؛ تنظیمات آن ممکن است باقی بماند.',example:'sudo apt remove package-name',extra:'قبل از تأیید، ببین چه بسته‌هایی حذف خواهند شد.',tags:'حذف برنامه'},
+  {os:'linux',cat:'سیستم و پردازش',name:'whoami',short:'—',desc:'نام کاربری‌ای را نشان می‌دهد که ترمینال با آن اجرا شده است.',example:'whoami',extra:'برای بررسی اینکه با چه کاربری وارد شده‌ای مفید است.',tags:'کاربر username'},
+  {os:'linux',cat:'سیستم و پردازش',name:'id',short:'—',desc:'شناسهٔ کاربر و گروه‌هایی را که عضو آن‌ها هستی نشان می‌دهد.',example:'id',extra:'برای بررسی عضویت گروه‌ها کاربرد دارد.',tags:'کاربر گروه uid gid'},
+  {os:'linux',cat:'سیستم و پردازش',name:'uname',short:'گزینه: -a',desc:'اطلاعات هسته و نوع سیستم را نمایش می‌دهد.',example:'uname -a',extra:'برای توزیع لینوکس و نسخهٔ آن معمولاً /etc/os-release را هم بخوان.',tags:'kernel نسخه سیستم'},
+  {os:'linux',cat:'سیستم و پردازش',name:'ps',short:'گزینه‌های پرکاربرد: aux',desc:'فهرستی از پردازش‌ها را نمایش می‌دهد.',example:'ps aux\nps aux | grep python',extra:'خروجی دوم برای پیدا کردن پردازش‌های مرتبط با Python است.',tags:'پردازش process'},
+  {os:'linux',cat:'سیستم و پردازش',name:'top',short:'نمایش زندهٔ پردازش‌ها',desc:'مصرف CPU و حافظه و پردازش‌های فعال را به‌صورت زنده نشان می‌دهد.',example:'top',extra:'برای خروج کلید q را بزن.',tags:'cpu ram مانیتور عملکرد'},
+  {os:'linux',cat:'سیستم و پردازش',name:'kill',short:'—',desc:'با شناسهٔ پردازش (PID) درخواست توقف می‌فرستد.',example:'kill 1234\nkill -TERM 1234',extra:'ابتدا با ps یا pgrep شناسه را پیدا کن؛ -9 را فقط در صورت نیاز واقعی به‌کار ببر.',tags:'متوقف کردن پردازش kill'},
+  {os:'linux',cat:'سیستم و پردازش',name:'df',short:'گزینه: -h',desc:'فضای استفاده‌شده و آزاد فایل‌سیستم‌ها را نمایش می‌دهد.',example:'df -h',extra:'-h اندازه‌ها را به واحدهای خوانا مثل GB نشان می‌دهد.',tags:'فضای دیسک حافظه'},
+  {os:'linux',cat:'سیستم و پردازش',name:'du',short:'گزینه: -sh',desc:'فضای مصرفی فایل یا پوشه را محاسبه می‌کند.',example:'du -sh ~/Downloads',extra:'-s خلاصه و -h اندازهٔ خوانا نمایش می‌دهد.',tags:'اندازه پوشه disk usage'},
+  {os:'linux',cat:'سیستم و پردازش',name:'free',short:'گزینه: -h',desc:'میزان حافظهٔ RAM و Swap را نشان می‌دهد.',example:'free -h',extra:'حافظهٔ cache در لینوکس بخشی از طراحی عادی مدیریت حافظه است.',tags:'ram memory'},
+  {os:'linux',cat:'سیستم و پردازش',name:'history',short:'—',desc:'دستورهای ثبت‌شده در تاریخچهٔ شِل را نشان می‌دهد.',example:'history',extra:'برای اجرای دوبارهٔ دستور قبلی معمولاً کلید فلش بالا هم کار می‌کند.',tags:'تاریخچه فرمان'},
+  {os:'linux',cat:'سیستم و پردازش',name:'clear',short:'—',desc:'صفحهٔ نمایشی ترمینال را پاک می‌کند.',example:'clear',extra:'فایل یا سابقهٔ دستورها را حذف نمی‌کند.',tags:'پاک کردن صفحه'},
+  {os:'linux',cat:'راهنما و اطلاعات',name:'man',short:'—',desc:'صفحهٔ راهنمای یک دستور را باز می‌کند.',example:'man ls',extra:'برای خروج q را بزن؛ با /عبارت داخل راهنما جست‌وجو می‌کنی.',tags:'راهنما manual help'},
+  {os:'linux',cat:'راهنما و اطلاعات',name:'--help',short:'گزینهٔ راهنمای سریع',desc:'بسیاری از برنامه‌ها با این گزینه فهرست خلاصه‌ای از گزینه‌ها را نمایش می‌دهند.',example:'ls --help\ncp --help',extra:'این یک دستور جدا نیست؛ گزینه‌ای است که به نام دستور اضافه می‌شود.',tags:'راهنمای سریع option'},
+  {os:'linux',cat:'راهنما و اطلاعات',name:'which',short:'—',desc:'مسیر اجرایی برنامه‌ای را که از PATH پیدا می‌شود نشان می‌دهد.',example:'which python',extra:'در Bash می‌توانی برای بررسی دقیق‌تر از type هم استفاده کنی.',tags:'مسیر برنامه پیدا کردن'},
+  {os:'linux',cat:'شبکه',name:'ip a',short:'ip address',desc:'کارت‌های شبکه و آدرس‌های IP آن‌ها را نمایش می‌دهد.',example:'ip a',extra:'فرمان مدرن و رایج برای مشاهدهٔ تنظیمات IP در لینوکس است.',tags:'ip آدرس شبکه'},
+  {os:'linux',cat:'شبکه',name:'ping',short:'—',desc:'ارتباط شبکه با یک میزبان را آزمایش می‌کند.',example:'ping -c 4 example.com',extra:'در بسیاری از توزیع‌ها -c تعداد بسته‌ها را محدود می‌کند.',tags:'اتصال تست شبکه'},
+  {os:'linux',cat:'شبکه',name:'ss',short:'گزینه: -tulpn',desc:'اتصال‌ها و سوکت‌های شبکه را نمایش می‌دهد.',example:'ss -tuln\nsudo ss -tulpn',extra:'برای دیدن نام پردازش‌ها یا جزئیات بیشتر ممکن است دسترسی مدیر لازم باشد.',tags:'پورت پورت های باز socket شبکه'},
+  {os:'linux',cat:'شبکه',name:'curl',short:'—',desc:'برای درخواست HTTP، آزمایش API یا دریافت محتوای یک URL کاربرد دارد.',example:'curl -I https://example.com\ncurl https://api.github.com',extra:'-I فقط سرآیندهای پاسخ HTTP را می‌گیرد.',tags:'http api وب درخواست'},
+  {os:'linux',cat:'شبکه',name:'wget',short:'—',desc:'فایل را از اینترنت دریافت می‌کند.',example:'wget https://example.com/file.zip',extra:'مطمئن شو نشانی منبع معتبر است.',tags:'دانلود فایل اینترنت'},
+  {os:'linux',cat:'شبکه',name:'ssh',short:'—',desc:'به‌صورت امن به یک سیستم راه دور متصل می‌شود.',example:'ssh user@192.168.1.10',extra:'برای اولین اتصال، کلید میزبان را با دقت بررسی کن.',tags:'اتصال remote سرور'},
+  {os:'linux',cat:'شبکه',name:'scp',short:'—',desc:'فایل را از طریق SSH بین سیستم‌ها کپی می‌کند.',example:'scp notes.txt user@server:/home/user/',extra:'سمت چپ فایل مبدأ و سمت راست مقصد است.',tags:'کپی انتقال فایل سرور'},
+  {os:'linux',cat:'فشرده‌سازی',name:'tar',short:'گزینه‌های رایج: -czf · -xzf · -tf',desc:'برای ساختن یا باز کردن آرشیوهای tar و tar.gz استفاده می‌شود.',example:'tar -czf backup.tar.gz project/\ntar -xzf backup.tar.gz\ntar -tf backup.tar.gz',extra:'فایل را قبل از استخراج از منبع نامطمئن بررسی کن.',tags:'فشرده سازی آرشیو extract zip'},
+  {os:'linux',cat:'سرویس و لاگ',name:'systemctl',short:'مدیریت سرویس‌ها با systemd',desc:'وضعیت سرویس‌ها را می‌بیند یا سرویس را شروع و متوقف می‌کند.',example:'systemctl status ssh\nsudo systemctl restart ssh',extra:'نام سرویس در هر توزیع ممکن است متفاوت باشد.',tags:'سرویس start stop restart'},
+  {os:'linux',cat:'سرویس و لاگ',name:'journalctl',short:'نمایش لاگ systemd',desc:'گزارش‌های سیستمی و سرویس‌ها را می‌خواند.',example:'journalctl -u ssh --since today\njournalctl -f',extra:'-f لاگ‌ها را به‌صورت زنده دنبال می‌کند.',tags:'لاگ log عیب یابی'},
+  {os:'linux',cat:'سرویس و لاگ',name:'exit',short:'—',desc:'از نشست فعلی شِل خارج می‌شود.',example:'exit',extra:'اگر در نشست SSH باشی، معمولاً همان اتصال را می‌بندد.',tags:'خروج ترمینال بستن'}
+];
+
+const osNames = {ps:'PowerShell',cmd:'Windows CMD',linux:'Linux'};
+const searchEl = document.getElementById('search');
+const gridEl = document.getElementById('grid');
+const categoriesEl = document.getElementById('categories');
+let activeOS = 'all';
+let activeCategory = 'همه دسته‌ها';
+let query = '';
+const allCategories = ['همه دسته‌ها', ...new Set(commands.map(c => c.cat))];
+
+document.getElementById('totalCount').textContent = commands.length + '+';
+allCategories.forEach(cat => {
+  const b = document.createElement('button');
+  b.className = 'catbtn' + (cat === activeCategory ? ' active' : '');
+  b.textContent = cat;
+  b.dataset.cat = cat;
+  b.addEventListener('click', () => { activeCategory = cat; updateCategoryButtons(); render(); });
+  categoriesEl.appendChild(b);
+});
+function updateCategoryButtons(){
+  categoriesEl.querySelectorAll('.catbtn').forEach(b => b.classList.toggle('active', b.dataset.cat === activeCategory));
+}
+document.querySelectorAll('.filterbtn').forEach(b => b.addEventListener('click', () => {
+  activeOS = b.dataset.os;
+  document.querySelectorAll('.filterbtn').forEach(x => x.classList.toggle('active', x === b));
+  render();
+}));
+searchEl.addEventListener('input', e => { query = e.target.value.trim().toLocaleLowerCase('fa'); render(); });
+document.getElementById('reset').addEventListener('click', () => {
+  query = ''; searchEl.value = ''; activeOS = 'all'; activeCategory = 'همه دسته‌ها';
+  document.querySelectorAll('.filterbtn').forEach(b => b.classList.toggle('active', b.dataset.os === 'all'));
+  updateCategoryButtons(); render(); searchEl.focus();
+});
+function esc(s){return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function render(){
+  const filtered = commands.filter(c => {
+    const matchesOS = activeOS === 'all' || c.os === activeOS;
+    const matchesCat = activeCategory === 'همه دسته‌ها' || c.cat === activeCategory;
+    const hay = [c.name,c.short,c.desc,c.example,c.extra,c.tags,c.cat,osNames[c.os]].join(' ').toLocaleLowerCase('fa');
+    return matchesOS && matchesCat && (!query || hay.includes(query));
+  });
+  document.getElementById('resultCount').textContent = `${filtered.length} مورد از ${commands.length} دستور`;
+  document.getElementById('listTitle').textContent = activeOS === 'all' ? 'فهرست دستورها' : `دستورهای ${osNames[activeOS]}`;
+  if(!filtered.length){gridEl.innerHTML = '<div class="empty">دستوری پیدا نشد. عبارت کوتاه‌تری جست‌وجو کن یا فیلترها را پاک کن.</div>'; return;}
+  gridEl.innerHTML = filtered.map((c,i) => `
+    <article class="card">
+      <div class="cardhead"><div><div class="command-title">${esc(c.name)}</div><div class="category">${esc(c.cat)}</div></div><span class="badge">${esc(osNames[c.os])}</span></div>
+      ${c.short && c.short !== '—' ? `<div class="aliases"><b>${c.os==='ps'?'مخفف / Alias':c.os==='linux'?'گزینه یا توضیح':'نام جایگزین / توضیح'}:</b> ${esc(c.short)}</div>` : ''}
+      <p class="desc">${esc(c.desc)}</p>
+      <div class="code-label">نمونهٔ اجرا</div><pre class="syntax" id="code-${i}">${esc(c.example)}</pre>
+      <div class="cardfoot"><span class="tip ${c.caution?'caution':''}">${c.caution?'احتیاط: ':''}${esc(c.extra || '')}</span><button class="copybtn" data-copy="${i}" type="button">کپی مثال</button></div>
+    </article>`).join('');
+  gridEl.querySelectorAll('[data-copy]').forEach(btn => btn.addEventListener('click', async () => {
+    const c = filtered[Number(btn.dataset.copy)];
+    try {
+      await navigator.clipboard.writeText(c.example);
+      btn.textContent = 'کپی شد ✓';
+    } catch (e) {
+      const ta = document.createElement('textarea'); ta.value = c.example; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select();
+      let ok = false; try { ok = document.execCommand('copy'); } catch(_) {}
+      ta.remove(); btn.textContent = ok ? 'کپی شد ✓' : 'کپی نشد';
+    }
+    setTimeout(() => { if(btn.isConnected) btn.textContent = 'کپی مثال'; }, 1500);
+  }));
+}
+render();
+</script>
+</body>
+</html>
